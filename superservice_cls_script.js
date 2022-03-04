@@ -14,16 +14,8 @@ require('body-parser-xml')(bodyParser);
 shell.mkdir('-p', folderPath);
 
  // Change the limits according to your response size
- app.use(
-  bodyParser.xml({
-    limit: '10MB', // Reject payload bigger than 10 MB
-    xmlParseOptions: {
-      normalize: true, // Trim whitespace inside text nodes
-      normalizeTags: true, // Transform tags to lowercase
-      explicitArray: false, // Only put nodes in array if >1
-    },
-  }),
-);
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true })); 
 
 app.get('/', (req, res) => res.send('Hello, I write data to file. Send them requests!'));
 
